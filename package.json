@@ -1,0 +1,22 @@
+{
+  "name": "mona-gallery-client",
+  "version": "1.0.0",
+  "description": "Official client library for integrating with Mona Gallery",
+  "main": "mona-client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mona",
+    "gallery",
+    "nft",
+    "web3",
+    "digital-assets"
+  ],
+  "author": "Mona Gallery",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monaverse/mona-gallery-client"
+  }
+} 

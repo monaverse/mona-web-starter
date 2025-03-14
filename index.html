@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONA Assets</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Three.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="auth-card">
+            <!-- Step 1: Request OTP -->
+            <div id="request-otp-section">
+                <h1>Login to use MONA Assets</h1>
+                <form id="request-otp-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <button type="submit" class="btn">Request OTP</button>
+                </form>
+                <div class="message-container">
+                    <p id="request-error-message" class="error-message"></p>
+                    <p id="request-success-message" class="success-message"></p>
+                </div>
+            </div>
+            
+            <!-- Step 2: Verify OTP -->
+            <div id="verify-otp-section" class="hidden">
+                <h1>Enter One-Time Password</h1>
+                <p class="info-text">Please enter the one-time password sent to your email.</p>
+                <form id="verify-otp-form">
+                    <div class="form-group">
+                        <label for="otp">One-Time Password</label>
+                        <input type="text" id="otp" name="otp" required>
+                    </div>
+                    <button type="submit" class="btn">Verify OTP</button>
+                </form>
+                <div class="message-container">
+                    <p id="verify-error-message" class="error-message"></p>
+                    <p id="verify-success-message" class="success-message"></p>
+                </div>
+                <button id="back-to-email-btn" class="btn secondary-btn">Back</button>
+            </div>
+            
+            <!-- Step 3: User Info -->
+            <div id="user-info" class="hidden">
+                <div class="assets-header">
+                    <div class="header-content">
+                        <h1>MONA Assets</h1>
+                        <p class="username-display">Username: <span id="user-username"></span></p>
+                        <a href="#" id="logout-btn" class="logout-link">Logout</a>
+                    </div>
+                    <a href="https://monaverse.com/objects/1" target="_blank" class="buy-assets-btn">Buy 3D Assets</a>
+                </div>
+                
+                <div class="assets-content">
+                    <div id="assets-container">
+                        <div class="assets-grid">
+                            <p class="loading-message">Loading assets...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 3D Scene Container -->
+                    <div id="scene-container" class="hidden">
+                        <h3>3D Viewer</h3>
+                        <div id="three-container"></div>
+                        <button id="close-scene-btn" class="btn secondary-btn">Close Viewer</button>
+                    </div>
+                </div>
+                
+                <!-- Hidden user info for reference -->
+                <div class="hidden-user-info hidden">
+                    <p>Email: <span id="user-email"></span></p>
+                    <p>Name: <span id="user-name"></span></p>
+                    
+                    <h3>Linked Wallets</h3>
+                    <div id="wallets-container">
+                        <p class="no-wallets">No wallets linked yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
