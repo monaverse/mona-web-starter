@@ -12,7 +12,16 @@
 </head>
 <body>
     <div class="container">
-        <div class="auth-card">
+        <!-- MONA Assets button that appears when UI is closed -->
+        <button id="show-mona-assets-btn" class="show-mona-assets-btn hidden">MONA Assets</button>
+        
+        <!-- MONA Login button that appears when user isn't logged in -->
+        <button id="show-mona-login-btn" class="show-mona-login-btn">MONA Login</button>
+        
+        <div class="auth-card hidden">
+            <!-- Close button for login UI - only visible in login state -->
+            <button class="login-close-btn">&times;</button>
+            
             <!-- Step 1: Request OTP -->
             <div id="request-otp-section">
                 <h1>Login to use MONA Assets</h1>
@@ -50,6 +59,7 @@
             <!-- Step 3: User Info -->
             <div id="user-info" class="hidden">
                 <div class="assets-header">
+                    <button class="close-btn">&times;</button>
                     <div class="header-content">
                         <h1>MONA Assets</h1>
                         <p class="username-display">Username: <span id="user-username"></span></p>
