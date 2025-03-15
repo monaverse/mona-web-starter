@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const COMMUNITY_TOKENS_ENDPOINT = `${API_BASE_URL}/tokens`; // Base endpoint for community tokens
     
     // Your MONA Application ID - Keep this private
-    const MONA_APP_ID = 'V7wunKVQHEbibDjDg5jARU';
+    const MONA_APP_ID = 'YOUR_MONA_APPLICATION_ID';
     
     // Initialize 3D Scene variables
     let scene, camera, renderer, controls, groundPlane, currentModel;
