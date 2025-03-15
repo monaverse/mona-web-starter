@@ -273,7 +273,7 @@ input:focus {
     height: 150px;
     object-fit: contain;
     margin: 0;
-    background-color: #ddd;
+    background-color: white;
 }
 
 /* 3D Scene Container Styles */
