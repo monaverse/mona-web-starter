@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const verifyOtpSection = document.getElementById('verify-otp-section');
     const userInfoSection = document.getElementById('user-info');
     const authCard = document.querySelector('.auth-card');
+    const closeBtn = document.querySelector('.close-btn');
+    const loginCloseBtn = document.querySelector('.login-close-btn');
+    const showMonaAssetsBtn = document.getElementById('show-mona-assets-btn');
+    const showMonaLoginBtn = document.getElementById('show-mona-login-btn');
     
     const requestOtpForm = document.getElementById('request-otp-form');
     const verifyOtpForm = document.getElementById('verify-otp-form');
@@ -72,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const COMMUNITY_TOKENS_ENDPOINT = `${API_BASE_URL}/tokens`; // Base endpoint for community tokens
     
     // Your MONA Application ID - Keep this private
-    const MONA_APP_ID = 'YOUR_MONA_APPLICATION_ID';
+    const MONA_APP_ID = 'V7wunKVQHEbibDjDg5jARU';
     
     // Initialize 3D Scene variables
     let scene, camera, renderer, controls, groundPlane, currentModel;
@@ -241,9 +245,60 @@ document.addEventListener('DOMContentLoaded', () => {
         sceneContainer.classList.add('hidden');
     }
     
-    // Add event listener for close button
+    // Add event listener for close scene button
     if (closeSceneBtn) {
         closeSceneBtn.addEventListener('click', closeScene);
+    }
+    
+    // Add event listener for close button (assets UI)
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            authCard.style.display = 'none';
+            // When closing the assets UI, always show the MONA Assets button
+            // since this button is only visible when user is logged in
+            showMonaAssetsBtn.classList.remove('hidden');
+            showMonaLoginBtn.classList.add('hidden');
+        });
+    }
+    
+    // Add event listener for login close button
+    if (loginCloseBtn) {
+        loginCloseBtn.addEventListener('click', () => {
+            // Hide the login UI
+            authCard.style.display = 'none';
+            
+            // Check login state to show the appropriate button
+            const accessToken = localStorage.getItem('monaAccessToken');
+            if (accessToken) {
+                // User is logged in, show MONA Assets button
+                showMonaAssetsBtn.classList.remove('hidden');
+                showMonaLoginBtn.classList.add('hidden');
+            } else {
+                // User is not logged in, show MONA Login button
+                showMonaLoginBtn.classList.remove('hidden');
+                showMonaAssetsBtn.classList.add('hidden');
+            }
+        });
+    }
+    
+    // Add event listener for show MONA Assets button
+    if (showMonaAssetsBtn) {
+        showMonaAssetsBtn.addEventListener('click', () => {
+            // Hide the button
+            showMonaAssetsBtn.classList.add('hidden');
+            // Show the UI
+            authCard.style.display = 'block';
+        });
+    }
+    
+    // Add event listener for show MONA Login button
+    if (showMonaLoginBtn) {
+        showMonaLoginBtn.addEventListener('click', () => {
+            // Hide the button
+            showMonaLoginBtn.classList.add('hidden');
+            // Show the login UI
+            authCard.style.display = 'block';
+        });
     }
     
     // Create assets container if it doesn't exist
@@ -277,11 +332,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Remove login-state class when user is logged in
         authCard.classList.remove('login-state');
         authCard.classList.add('logged-in-state');
+        // Hide login button, show assets UI
+        showMonaLoginBtn.classList.add('hidden');
+        authCard.classList.remove('hidden');
         fetchUserProfile(accessToken);
     } else {
         // Ensure we're in login state if no token is found
         authCard.classList.add('login-state');
         authCard.classList.remove('logged-in-state');
+        
+        // Show login button, hide assets UI
+        showMonaLoginBtn.classList.remove('hidden');
+        authCard.classList.add('hidden');
         
         // Make sure user info section is hidden
         userInfoSection.classList.add('hidden');
@@ -445,7 +507,12 @@ document.addEventListener('DOMContentLoaded', () => {
         authCard.classList.remove('logged-in-state');
         authCard.classList.add('login-state');
         
-        // Show request OTP section
+        // Hide the auth card completely and show the MONA Login button
+        authCard.style.display = 'none';
+        showMonaLoginBtn.classList.remove('hidden');
+        showMonaAssetsBtn.classList.add('hidden');
+        
+        // Make sure user info section is hidden and request OTP section is ready for next login
         userInfoSection.classList.add('hidden');
         verifyOtpSection.classList.add('hidden');
         requestOtpSection.classList.remove('hidden');
@@ -526,7 +593,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (walletObjects.length > 0) {
                     // Store wallet objects in a data attribute on the wallets container
                     walletsContainer.dataset.wallets = JSON.stringify(walletObjects);
-            } else {
+                } else {
                     console.log('No valid wallets found after processing');
                     walletsContainer.innerHTML = '<p class="no-wallets">No valid wallets found.</p>';
                 }

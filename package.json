@@ -1,8 +1,12 @@
 {
   "name": "mona-gallery-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official client library for integrating with Mona Gallery",
   "main": "mona-client.js",
+  "files": [
+    "mona-client.js",
+    "README.md"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +21,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/monaverse/mona-gallery-client"
+    "url": "https://github.com/monaverse/mona-web-starter"
+  },
+  "bugs": {
+    "url": "https://github.com/monaverse/mona-web-starter/issues"
+  },
+  "homepage": "https://github.com/monaverse/mona-web-starter#readme",
+  "engines": {
+    "node": ">=14.0.0"
   }
 } 
